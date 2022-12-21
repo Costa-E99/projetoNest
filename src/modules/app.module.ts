@@ -3,14 +3,11 @@ import { AppController } from '../controllers/app.controller';
 import { AppService } from '../services/app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TaskModules } from './task.module';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 @Module({
-  imports: [
-    // MongooseModule.forRoot('mongodb+srv://eduardo2:1599877411233690@cluster0.oss8krr.mongodb.net/?',),
-    MongooseModule.forRoot(
-      'mongodb+srv://eduardo2:1599877411233690@cluster0.oss8krr.mongodb.net/save-up',
-    ),
-    TaskModules,
-  ],
+  imports: [MongooseModule.forRoot(process.env.MONGO_URI), TaskModules],
   controllers: [AppController],
   providers: [AppService],
 })
