@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
   Put,
 } from '@nestjs/common';
@@ -21,7 +20,7 @@ export class TasksController {
   }
 
   @Get(':id')
-  async getById(@Param('id') id: string): Promise<Task> {
+  async getById(@Param('id') id: number): Promise<Task> {
     return this.taskService.getById(id);
   }
   @Post()
@@ -29,13 +28,13 @@ export class TasksController {
     return this.taskService.create(task);
   }
   @Put(':id')
-  async updated(@Param('id') id: string, @Body() task: Task): Promise<Task> {
+  async updated(@Param('id') id: number, @Body() task: Task): Promise<Task> {
     task.id = id;
     return this.taskService.updated(id, task);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
+  async delete(@Param('id') id: number) {
     this.taskService.deletar(id);
   }
 }

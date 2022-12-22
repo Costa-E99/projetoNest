@@ -10,22 +10,21 @@ export class TaskService {
   async getAll() {
     return await this.taskModel.find().exec();
   }
-  async getById(id: string) {
+  async getById(id: number) {
     return await this.taskModel.findById(id).exec();
   }
 
   async create(task: Task) {
     const createdTask = new this.taskModel(task);
-    console.log(createdTask.descricao);
     return await createdTask.save();
   }
 
-  async updated(id: string, task: Task) {
+  async updated(id: number, task: Task) {
     await this.taskModel.updateOne({ _id: id }, task).exec();
     return this.getById(id);
   }
 
-  async deletar(id: string) {
+  async deletar(id: number) {
     return await this.taskModel.deleteOne({ _id: id }).exec();
   }
 }
